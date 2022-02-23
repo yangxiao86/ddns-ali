@@ -1,6 +1,6 @@
 {
   "name": "ddns-ali",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "提供阿里云的DDNS设置，支持多网卡多域名绑定",
   "main": "dist/index.js",
   "scripts": {
@@ -8,14 +8,14 @@
     "npmPublish": "npm publish --access public -registry=https://registry.npmjs.org"
   },
   "dependencies": {
-    "@alicloud/pop-core": "^1.7.9"
+    "@alicloud/pop-core": "^1.7.9",
+    "tslib": "^2.3.1"
   },
   "author": "yangxiao (ifyx@qq.com)",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^17.0.19",
     "ts-node": "^10.5.0",
-    "tslib": "^2.3.1",
     "typescript": "^4.5.5"
   },
   "repository": {
@@ -30,6 +30,9 @@
     "阿里ddns解析"
     
   ],
+  "bin": {
+    "ddns-ali": "dist/index.js"
+  },
   "files": [
     "dist/",
     "package.json",
