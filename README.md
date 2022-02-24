@@ -29,7 +29,7 @@ npm i -g ddns-ali
 
 参数之间只能有一个空格, 如果是win环境需要在powershell中执行。
 
-网卡查看命令 `ifconfig`,一般为en0，en1等，选择有IP的的进行绑定
+网卡查看命令 `ifconfig`,一般为en0，en1等，选择有本地IP，如192.168.xx.xx的的进行绑定
 
 多网卡绑定多域名方式：
 
