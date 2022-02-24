@@ -73,3 +73,17 @@ async function init(){
 - -e `true或false` true是命令行执行
 - -Domain `'网卡名1&域名1，网卡名2&域名2'`, 网卡名与域名通过‘&’进行连接，多个域名使用','分割 
 - -ip `4或6` 指定要绑定的的ip类型
+
+## 定时执行
+
+程序不包含定时执行，现在各种系统都有定时任务。没必要在多此一举。节省系统资源。
+
+1. 编写一个run.sh命令文件
+
+```
+#!/bin/bash
+ddns-ali -e true -AccessKey 123 -AccessKeySecret 123 -Domain 'eth0&eth0.xxx.com,eth1&eth1.xxx.com'
+# read
+```
+
+2. win `计划任务中`添加 `run.sh` ，mac/linux 可以在`crontab`中添加 `run.sh`
