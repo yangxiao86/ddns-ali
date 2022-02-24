@@ -2,10 +2,12 @@
 
 import { IConfig,mian } from './ddns';
 import { getArgv, getDomain } from './utils/getArgv';
-import { log } from './utils/log';
+import { log,logConfig } from './utils/log';
 import { printLocalNetwork } from './utils/printLocalNet';
 
-export {IConfig,mian};
+export {IConfig,mian,logConfig};
+    
+logConfig.debug = true;// 是否输出日志信息
 
 async function init(){
     const config = {} as IConfig;

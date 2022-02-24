@@ -1,5 +1,9 @@
+export let logConfig = {
+    debug:true
+}
 export function log(a1: any, a2?: any, a3?: any, a4?: any) {
-    if (true) {
+
+    if (logConfig.debug) {
 
         console.log(`${Date.now().toFixed(1)} => ${a1}${getText(a2)}${getText(a3)}${getText(a4)}`);
     }
