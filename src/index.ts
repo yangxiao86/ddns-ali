@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 import { IConfig,mian } from './ddns';
 import { getArgv, getDomain } from './utils/getArgv';
@@ -15,8 +16,6 @@ async function init(){
     config.Domain = config.DomainObj.domain;
     config.Ethernets = config.DomainObj.ethernet;
 
-    printLocalNetwork();
-
     const r = await mian(config);
     if(r) {
         log('---成功---');
@@ -26,6 +25,7 @@ async function init(){
 }
 
 if(getArgv('e') === 'true') {
+    printLocalNetwork();
     log('---开始---');
     init();
 }

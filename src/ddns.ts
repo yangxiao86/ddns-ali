@@ -69,7 +69,7 @@ async function updateRecord(domain: string, networkIp: string, localObj: LocalNe
     const mainDomain = domain.split('.').slice(-2).join('.');
 
     const domainRecords = await getDescribeDomainRecords(subDomain, mainDomain);
-    if (domainRecords) {
+    if (domainRecords && domainRecords.length > 0) {
         // 匹配已有记录是否存在
         for (let i = 0; i < domainRecords.length; i++) {
             const item = domainRecords[i]
@@ -87,6 +87,8 @@ async function updateRecord(domain: string, networkIp: string, localObj: LocalNe
                 }
             }
         }
+    } else {
+        log(`没有找到更新的域名，建议在阿里云控制台添加域名`);
     }
 
     return;
@@ -94,22 +96,22 @@ async function updateRecord(domain: string, networkIp: string, localObj: LocalNe
 
 
 export interface IConfig {
-    AccessKey:string;
-    AccessKeySecret:string;
+    AccessKey: string;
+    AccessKeySecret: string;
     IPVersion: '6' | '4';
-    DomainObj:{
+    DomainObj: {
         ethernet: string[];
         domain: string[];
     };
     Domain: string[];
     Ethernets: string[];
-    aliyunCore:any
-} ;
+    aliyunCore: any
+};
 
 let config = {} as IConfig;
 const Core = require('@alicloud/pop-core');
 
-export async function mian(c:IConfig) {
+export async function mian(c: IConfig) {
 
     if (!c.AccessKey || !c.AccessKeySecret || !c.Domain.length) {
         log('配置参数异常AccessKey｜AccessKeySecret｜Domain');
@@ -117,7 +119,7 @@ export async function mian(c:IConfig) {
     }
 
     config = c;
-    
+
     config.aliyunCore = new Core({
         accessKeyId: config.AccessKey,
         accessKeySecret: config.AccessKeySecret,
@@ -127,11 +129,18 @@ export async function mian(c:IConfig) {
 
     let records: AliyunUpdateDomainRecordResponse[] = [];
     const ip = geLocalNetWorkInterfaces(config.Ethernets);
-    console.log("==>ip", ip);
+    // console.log("==>ip", ip);
     if (ip) { // 多IP
         let i = 0;
         const ipvs = config.IPVersion === '4' ? ip.ipv4s : ip.ipv6s;
-        for (let value of ipvs.values()) {
+        const values: LocalNetWorkInterface[] = [];
+
+        ipvs.forEach(value => {
+            values.push(value);
+        })
+
+        for (let key in values) {
+            const value = values[key];
             const networkIp = await getNetIp(value.address);
             if (networkIp) {
                 let index = config.Ethernets.indexOf(value.name);
@@ -139,10 +148,10 @@ export async function mian(c:IConfig) {
                 log(`准备更新：${config.Domain[index]} -> ${networkIp}`);
                 const record = await updateRecord(config.Domain[index], networkIp, value);
                 await i++;
-                if(record) {
+                if (record) {
                     records.push(record);
                 }
-                
+
             }
         }
     } else { // 单IP
@@ -155,7 +164,7 @@ export async function mian(c:IConfig) {
             netmask: "默认"
         }
         const record = await updateRecord(config.Domain[0], networkIp, networkInfo);
-        if(record) {
+        if (record) {
             records.push(record);
         }
     }

@@ -15,6 +15,7 @@
 
 阿里云AccessKey开通：https://help.aliyun.com/document_detail/38738.html
 
+node版本>=16
 
 ## 安装方式
 
@@ -24,7 +25,7 @@ npm i -g ddns-ali
 
 ## 命令执行
 
-参数之间只能有一个空格
+参数之间只能有一个空格, 如果是win环境需要在powershell中执行。
 
 多网卡绑定多域名方式：
 
