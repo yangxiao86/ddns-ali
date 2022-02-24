@@ -15,6 +15,8 @@
 
 阿里云AccessKey开通：https://help.aliyun.com/document_detail/38738.html
 
+必要权限：UpdateDomainRecord,DescribeDomainRecords
+
 node版本>=16
 
 ## 安装方式
