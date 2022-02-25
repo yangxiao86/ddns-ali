@@ -25,7 +25,7 @@ node版本>=16
 npm i -g ddns-ali 
 ```
 
-## 命令执行
+## 命令执行方式
 
 参数之间只能有一个空格, 如果是win环境需要在powershell中执行。
 
