@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-import { IConfig,mian } from './ddns';
+import { IConfig, mian } from './ddns';
 import { getArgv, getDomain } from './utils/getArgv';
-import { log,logConfig } from './utils/log';
+import { log, logConfig } from './utils/log';
 import { printLocalNetwork } from './utils/printLocalNet';
 
-export {IConfig,mian,logConfig};
-    
+export { IConfig, mian, logConfig, getArgv, getDomain, log };
+
 logConfig.debug = true;// 是否输出日志信息
 
-async function init(){
+async function init() {
     const config = {} as IConfig;
     config.AccessKey = getArgv('AccessKey') as string;
     config.AccessKeySecret = getArgv('AccessKeySecret') as string;
@@ -19,14 +19,14 @@ async function init(){
     config.Ethernets = config.DomainObj.ethernet;
 
     const r = await mian(config);
-    if(r) {
+    if (r) {
         log('---成功---');
-    }else{
+    } else {
         log('---失败---');
     }
 }
 
-if(getArgv('e') === 'true') {
+if (getArgv('e') === 'true') {
     printLocalNetwork();
     log('---开始---');
     init();

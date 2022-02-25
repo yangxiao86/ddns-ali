@@ -52,7 +52,7 @@ ddns-ali -e true -ip 6 -AccessKey 123 -AccessKeySecret 123 -Domain '网卡名&et
 ## 程序引入方式
 
 ``` typescript
-import { IConfig,mian,logConfig } from 'ddns-ali';
+import { IConfig, mian, logConfig, getArgv, getDomain, log } from 'ddns-ali';
 
 // logConfig.debug = true;// 是否输出日志信息
 
