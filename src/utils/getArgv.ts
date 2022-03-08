@@ -7,6 +7,8 @@ export function getArgv(key: string) {
     for (let i = 0; i < process.argv.length; i++) {
         if (process.argv[i] === '-' + key) {
             return process.argv[i + 1];
+        }else if(process.argv[i] === '-v' || process.argv[i] === '-version'){
+            return 'true';
         }
     }
     return undefined;

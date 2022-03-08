@@ -81,6 +81,7 @@ async function init(){
 - -e `true或false` true是命令行执行
 - -Domain `'网卡名1&域名1，网卡名2&域名2'`, 网卡名与域名通过‘&’进行连接，多个域名使用','分割 
 - -ip `4或6` 指定要绑定的的ip类型
+- -v 输出版本，与其他参数冲突
 
 ## 定时执行
 
@@ -98,6 +99,13 @@ ddns-ali -e true -AccessKey 123 -AccessKeySecret 123 -Domain 'eth0&eth0.xxx.com,
 
 
 ## 更新日志
+
+### v1.0.8
+
+增加命令行下，版本输出
+```
+ddns-ali -v
+```
 
 ### v1.0.7
 

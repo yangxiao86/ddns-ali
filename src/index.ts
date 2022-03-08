@@ -4,6 +4,7 @@ import { IConfig, mian } from './ddns';
 import { getArgv, getDomain } from './utils/getArgv';
 import { log, logConfig } from './utils/log';
 import { printLocalNetwork } from './utils/printLocalNet';
+const packages = require('../package.json');
 
 export { IConfig, mian, logConfig, getArgv, getDomain, log };
 
@@ -28,6 +29,10 @@ async function init() {
         log('---失败---');
     }
     clearTimeout(settimeID);
+}
+if (getArgv('v') || getArgv('version')) {
+    console.log("当前版本:",packages.version);
+    process.exit(0);
 }
 
 if (getArgv('e') === 'true') {

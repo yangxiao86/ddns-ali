@@ -1,6 +1,6 @@
 {
   "name": "ddns-ali",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "提供阿里云的DDNS设置，支持多网卡多域名绑定public ",
   "main": "dist/index.js",
   "scripts": {
