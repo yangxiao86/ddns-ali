@@ -18,12 +18,16 @@ async function init() {
     config.Domain = config.DomainObj.domain;
     config.Ethernets = config.DomainObj.ethernet;
 
+    const settimeID = setTimeout(() => {
+        process.exit(1);
+    }, 10000);
     const r = await mian(config);
     if (r) {
         log('---成功---');
     } else {
         log('---失败---');
     }
+    clearTimeout(settimeID);
 }
 
 if (getArgv('e') === 'true') {

@@ -95,3 +95,14 @@ ddns-ali -e true -AccessKey 123 -AccessKeySecret 123 -Domain 'eth0&eth0.xxx.com,
 ```
 
 2. win `计划任务中`添加 `run.sh` ，mac/linux 可以在`crontab`中添加 `run.sh`
+
+
+## 更新日志
+
+### v1.0.7
+
+增加命令行下，十秒后如果没有更新成功，强制关闭线程。
+
+### v1.0.6
+
+版本发布
