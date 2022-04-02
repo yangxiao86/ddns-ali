@@ -100,6 +100,10 @@ ddns-ali -e true -AccessKey 123 -AccessKeySecret 123 -Domain 'eth0&eth0.xxx.com,
 
 ## 更新日志
 
+### v1.0.10
+
+完善ipv6支持
+
 ### v1.0.8
 
 增加命令行下，版本输出
