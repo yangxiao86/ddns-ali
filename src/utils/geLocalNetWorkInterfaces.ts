@@ -31,7 +31,7 @@ export function geLocalNetWorkInterfaces(networkNames?: string[]) {
                                 ipv4s.set(address, newObject);
                             }
                         }
-                        if (newObject.family === 'IPv6' && address.indexOf('fe80::') === -1) {
+                        if (newObject.family === 'IPv6') {
                             if (!ipv6s.has(address)) {
                                 ipv6s.set(address, newObject);
                             }

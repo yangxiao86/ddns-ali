@@ -20,10 +20,11 @@ async function init() {
     config.Ethernets = config.DomainObj.ethernet;
 
     const settimeID = setTimeout(() => {
+        log('---超时退出---');
         process.exit(1);
     }, 10000);
     const r = await mian(config);
-    if (r) {
+    if (r && r.length) {
         log('---成功---');
     } else {
         log('---失败---');
@@ -31,7 +32,7 @@ async function init() {
     clearTimeout(settimeID);
 }
 if (getArgv('v') || getArgv('version')) {
-    console.log("当前版本:",packages.version);
+    console.log("当前版本:", packages.version);
     process.exit(0);
 }
 

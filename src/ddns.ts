@@ -128,20 +128,26 @@ export async function mian(c: IConfig) {
     });
 
     let records: AliyunUpdateDomainRecordResponse[] = [];
+    const values: LocalNetWorkInterface[] = [];
     const ip = geLocalNetWorkInterfaces(config.Ethernets);
-    // console.log("==>ip", ip);
-    if (ip) { // 多IP
-        let i = 0;
-        const ipvs = config.IPVersion === '4' ? ip.ipv4s : ip.ipv6s;
-        const values: LocalNetWorkInterface[] = [];
-
+    if (ip) {
+        const ipvs = config.IPVersion === '6' ? ip.ipv6s : ip.ipv4s;
         ipvs.forEach(value => {
             values.push(value);
         })
+    }
+
+    console.log("==>ip", values);
+
+    if (values.length > 0) { // 多IP
+        let i = 0;
 
         for (let key in values) {
             const value = values[key];
-            const networkIp = await getNetIp(value.address);
+            const networkIp = await getNetIp(value.address).catch(value => {
+                log(`无法获取公网地址，绑定失败：${value}`)
+            });
+
             if (networkIp) {
                 let index = config.Ethernets.indexOf(value.name);
                 index = index === -1 ? 0 : index;
@@ -151,7 +157,6 @@ export async function mian(c: IConfig) {
                 if (record) {
                     records.push(record);
                 }
-
             }
         }
     } else { // 单IP

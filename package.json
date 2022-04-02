@@ -4,7 +4,7 @@
   "description": "提供阿里云的DDNS设置，支持多网卡多域名绑定public ",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -w",
     "npmTag": "npm publish  --tag beta -registry=https://registry.npmjs.org",
     "npmPublish": "npm publish --access  -registry=https://registry.npmjs.org"
   },
