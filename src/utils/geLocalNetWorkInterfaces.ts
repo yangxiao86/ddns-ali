@@ -10,17 +10,17 @@ export interface LocalNetWorkInterface {
 
 export function geLocalNetWorkInterfaces(networkNames?: string[]) {
 
-    if(networkNames === undefined || networkNames.length === 0) {
+    if (networkNames === undefined || networkNames.length === 0) {
         return undefined;
     }
-    
-    const ipv4s = new Map<string,LocalNetWorkInterface>();
-    const ipv6s = new Map<string,LocalNetWorkInterface>();
+
+    const ipv4s = new Map<string, LocalNetWorkInterface>();
+    const ipv6s = new Map<string, LocalNetWorkInterface>();
 
     const networksObj = os.networkInterfaces();
     for (let nw in networksObj) {
         let objArr = networksObj[nw];
-        if (objArr){
+        if (objArr) {
             objArr.forEach((obj, idx, arr) => {
                 networkNames.forEach(ispName => {
                     if (nw.indexOf(ispName) !== -1) {
@@ -32,18 +32,20 @@ export function geLocalNetWorkInterfaces(networkNames?: string[]) {
                             }
                         }
                         if (newObject.family === 'IPv6') {
-                            if (!ipv6s.has(address)) {
-                                ipv6s.set(address, newObject);
-                            }
 
+                            if (newObject.address.length === newObject.netmask.length) {
+                                if (!ipv6s.has(address)) {
+                                    ipv6s.set(address, newObject);
+                                }
+                            }
                         }
                     }
                 });
             });
-        }else{
+        } else {
             return undefined;
         }
-            
+
     }
     return { ipv4s, ipv6s };
 }

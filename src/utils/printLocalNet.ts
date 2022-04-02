@@ -13,5 +13,6 @@ export function printLocalNetwork() {
                 console.log(`协议族：${obj.family}`);
             });
         }
+        console.log(`===========================`);
     }
 }

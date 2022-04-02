@@ -48,10 +48,11 @@ async function getDescribeDomainRecords(subDomain: string, mainDomain: string): 
 
 async function UpdateDomainRecord(RecordId: string, RR: string, Value: string): Promise<AliyunUpdateDomainRecordResponse | undefined> {
 
+    const _type = Value.length > 19 ? 'AAAA' : 'A';
     const res: AliyunUpdateDomainRecordResponse = await config.aliyunCore.request('UpdateDomainRecord', {
         RecordId,
         RR,
-        Type: 'A',
+        Type: _type,
         Value
     }, {
         method: 'POST'
@@ -137,13 +138,14 @@ export async function mian(c: IConfig) {
         })
     }
 
-    console.log("==>ip", values);
-
     if (values.length > 0) { // 多IP
         let i = 0;
 
         for (let key in values) {
             const value = values[key];
+            if (value.address.indexOf('fe80') !== -1) {
+                continue;
+            }
             const networkIp = await getNetIp(value.address).catch(value => {
                 log(`无法获取公网地址，绑定失败：${value}`)
             });
