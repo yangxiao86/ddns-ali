@@ -33,7 +33,7 @@ export function geLocalNetWorkInterfaces(networkNames?: string[]) {
                         }
                         if (newObject.family === 'IPv6') {
 
-                            if (newObject.address.length === newObject.netmask.length) {
+                            if (newObject.address.split(":").length === newObject.netmask.split(":").length) {
                                 if (!ipv6s.has(address)) {
                                     ipv6s.set(address, newObject);
                                 }
